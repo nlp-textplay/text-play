@@ -82,12 +82,12 @@ if __name__ == '__main__':
         dis_model.load_state_dict(torch.load(args.current_save_path + '/yelp_dis_model_params.pkl'))
        
     else:
-    train_data_loader=non_pair_data_loader(
-        batch_size=args.batch_size, id_bos=args.id_bos,
-        id_eos=args.id_eos, id_unk=args.id_unk,
-        max_sequence_length=args.max_sequence_length, vocab_size=args.vocab_size,
-        gpu=args.gpu
-    )
+        train_data_loader=non_pair_data_loader(
+            batch_size=args.batch_size, id_bos=args.id_bos,
+            id_eos=args.id_eos, id_unk=args.id_unk,
+            max_sequence_length=args.max_sequence_length, vocab_size=args.vocab_size,
+            gpu=args.gpu
+        )
 
     train_data_loader.create_batches(args.train_file_list, args.train_label_list, if_shuffle=True)
 
