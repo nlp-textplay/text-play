@@ -113,9 +113,9 @@ def to_var(x, gpu, volatile=False):
 
 
 def get_cuda(tensor, gpu):
-    # if torch.cuda.is_available():
-    #     tensor = tensor
-    return tensor.to(torch.device('cuda:{}'.format(gpu)))
+    if torch.cuda.is_available():
+        tensor = tensor.to(torch.device('cuda:{}'.format(gpu)))
+    return tensor
 
 
 def load_word_dict_info(word_dict_file, max_num):
@@ -214,7 +214,7 @@ class non_pair_data_loader():
         self.max_sequence_length = max_sequence_length
         self.vocab_size = vocab_size
         self.gpu=gpu
-        self.device=torch.device('cuda:{}'.format(self.gpu))
+        self.device=torch.device('cuda:{}'.format(self.gpu)) if torch.cuda.is_available() else torch.device('cpu')
 
     def create_batches(self, train_file_list, train_label_list, if_shuffle=True):
         self.data_label_pairs = []
