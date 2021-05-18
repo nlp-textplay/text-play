@@ -120,7 +120,7 @@ if __name__ == '__main__':
                                    gpu=args.gpu,
                                    d_ff=args.transformer_ff_size), args.gpu)
 
-    ae_model.load_state_dict(torch.load('./save/yelp_ae_model_params.pkl', map_location=device))
+    ae_model.load_state_dict(torch.load('./save/{}_ae_model_params.pkl'.format(args.task), map_location=device))
     generation(ae_model, args)
 
     print("Done!")
