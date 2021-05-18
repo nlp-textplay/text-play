@@ -78,8 +78,8 @@ if __name__ == '__main__':
     dis_optimizer=torch.optim.Adam(dis_model.parameters(), lr=0.0001)
     if args.load_model:
         # Load models' params from checkpoint
-        transformer.load_state_dict(torch.load(args.current_save_path + '/yelp_lm_model_params.pkl'))
-        dis_model.load_state_dict(torch.load(args.current_save_path + '/yelp_dis_model_params.pkl'))
+        transformer.load_state_dict(torch.load(args.current_save_path + '/{}_lm_model_params.pkl'.format(args.name)))
+        dis_model.load_state_dict(torch.load(args.current_save_path + '/{}_dis_model_params.pkl'.format(args.name)))
        
     else:
         train_data_loader=non_pair_data_loader(
@@ -125,5 +125,10 @@ if __name__ == '__main__':
         summary.add_scalar('{}/val/Discriminator'.format(args.name), loss_v_dis, epoch)
         summary.add_scalar('{}/val/Acc'.format(args.name), acc, epoch)
     
+
+    # necessary?
+    torch.save(transformer.state_dict(), 'save/{}_ae_model_params.pkl'.format(args.name)) # renamed from lm
+    torch.save(dis_model.state_dict(), 'save/{}_dis_model_params.pkl'.format(args.name))
+        
     print("Done!")
 
