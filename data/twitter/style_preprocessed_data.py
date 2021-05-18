@@ -5,9 +5,9 @@ nltk.download('punkt')
 def buid_dict_file():
     word_to_id = {}
     dict_file = 'processed_files/word_to_id.txt'
-    file1 = ['sentiment.train.0', 'sentiment.train.1',
-             'sentiment.dev.0', 'sentiment.dev.1',
-             'sentiment.test.0', 'sentiment.test.1']
+    file1 = ['style.train.0', 'style.train.1',
+             'style.dev.0', 'style.dev.1',
+             'style.test.0', 'style.test.1']
     for file_item in file1:
         with open(file_item, 'r') as f:
             for item in f:
@@ -64,9 +64,9 @@ def build_id_file():
     print("Load embedding success! Num: %d" % len(word_dict))
 
     # generate id file
-    file1 = ['sentiment.train.0', 'sentiment.train.1',
-             'sentiment.dev.0', 'sentiment.dev.1',
-             'sentiment.test.0', 'sentiment.test.1']
+    file1 = ['style.train.0', 'style.train.1',
+             'style.dev.0', 'style.dev.1',
+             'style.test.0', 'style.test.1']
     for file_item in file1:
         id_file_data = []
         with open(file_item, 'r') as f:
