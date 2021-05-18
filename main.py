@@ -127,7 +127,7 @@ if __name__ == '__main__':
     
 
     # necessary?
-    torch.save(transformer.state_dict(), 'save/{}__ae_model_params.pkl'.format(args.name)) # renamed from lm
+    torch.save(transformer.state_dict(), 'save/{}_ae_model_params.pkl'.format(args.name)) # renamed from lm
     torch.save(dis_model.state_dict(), 'save/{}_dis_model_params.pkl'.format(args.name))
         
     print("Done!")
