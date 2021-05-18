@@ -53,6 +53,9 @@ parser.add_argument('--gpu', type=int, default=2)
 parser.add_argument('--name', type=str, default='yelp')
 parser.add_argument('--load_model', type=bool)
 parser.add_argument('--load_iter', type=int)
+
+parser.add_argument('--pretrained_embed', type=bool, default=False)
+
 args = parser.parse_args()
 
 device=torch.device(f"cuda:{args.gpu}" if torch.cuda.is_available() else "cpu")
@@ -70,7 +73,8 @@ if __name__ == '__main__':
                                    d_model=args.transformer_model_size,
                                    latent_size=args.latent_size,
                                    gpu=args.gpu, 
-                                   d_ff=args.transformer_ff_size), args.gpu)
+                                   d_ff=args.transformer_ff_size,
+                                   pretrained_embed=args.pretrained_embed), args.gpu)
 
     dis_model=get_cuda(Classifier(1, args),args.gpu)
     lm_optimizer = NoamOpt(transformer.src_embed[0].d_model, 1, 2000,

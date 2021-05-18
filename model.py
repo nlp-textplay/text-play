@@ -452,13 +452,13 @@ class EncoderDecoder(nn.Module):
 #        return list(reversed(hs))
             
 
-def make_model(d_vocab, N, d_model, latent_size, gpu, d_ff=1024, h=4, dropout=0.1, pretrain=True):
+def make_model(d_vocab, N, d_model, latent_size, gpu, d_ff=1024, h=4, dropout=0.1, pretrained_embed=True):
     """Helper: Construct a model from hyperparameters."""
     c = copy.deepcopy
     d_style=128
     position = PositionalEncoding(d_model, dropout)
     share_embedding = Embeddings(d_model, d_vocab)
-    if pretrain:
+    if pretrained_embed:
         from transformers import GPT2Model
         gpt = GPT2Model.from_pretrained('gpt2')
         pre = gpt.get_input_embeddings()
